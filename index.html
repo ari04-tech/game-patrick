@@ -77,12 +77,12 @@
 
         <!-- STUDENT REGISTRATION / SESSION BAR -->
         <section id="user-info-section" class="mb-6 bg-slate-800/60 rounded-2xl p-4 border border-slate-700/60 backdrop-blur-sm">
-            <form id="student-form" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
                 <div>
                     <label class="block text-xs font-semibold text-slate-400 mb-1">NAMA SISWA / KELOMPOK</label>
                     <div class="relative">
                         <i class="fa-solid fa-user absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                        <input type="text" id="student-name" placeholder="Contoh: Icha / Kelompok 1" required
+                        <input type="text" id="student-name" placeholder="Contoh: Icha / Kelompok 1"
                             class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 pl-9 pr-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                     <label class="block text-xs font-semibold text-slate-400 mb-1">KELAS / JURUSAN</label>
                     <div class="relative">
                         <i class="fa-solid fa-graduation-cap absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                        <input type="text" id="student-class" placeholder="Contoh: X TKR 1 / XI DKV" required
+                        <input type="text" id="student-class" placeholder="Contoh: X TKR 1 / XI DKV"
                             class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 pl-9 pr-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
                     </div>
                 </div>
@@ -106,12 +106,12 @@
                     </div>
                 </div>
                 <div>
-                    <button type="submit" id="start-btn"
+                    <button type="button" id="start-btn" onclick="startGameSession()"
                         class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-2 px-4 rounded-xl text-sm transition shadow-md shadow-blue-600/20 flex items-center justify-center gap-2">
                         <i class="fa-solid fa-play"></i> Mulai Tantangan
                     </button>
                 </div>
-            </form>
+            </div>
         </section>
 
         <!-- DASHBOARD STATUS & STATS -->
@@ -199,7 +199,7 @@
                 <div class="mt-4 p-3 bg-slate-900/50 rounded-xl border border-slate-700/40 text-xs text-slate-400 flex items-center justify-between">
                     <span class="flex items-center gap-2">
                         <i class="fa-solid fa-lightbulb text-amber-400"></i>
-                        <span>Permainan sedang berlangsung. Selesaikan semua baris hingga tuntas!</span>
+                        <span id="game-status-text">Silakan isi nama dan kelas, lalu klik Mulai Tantangan untuk mulai bermain!</span>
                     </span>
                     <span class="text-slate-500 font-mono hidden sm:inline">Papan acak berbasis Lembar Kerja PATRICK</span>
                 </div>
@@ -245,10 +245,10 @@
                         <i class="fa-solid fa-list-check"></i> Petunjuk Permainan
                     </h4>
                     <ol class="text-xs text-slate-300 space-y-2 list-decimal list-inside pl-1">
-                        <li>Pilih baris warna yang ingin diselesaikan.</li>
-                        <li>Perhatikan selisih atau perbandingan antar suku (U1 s.d U6).</li>
-                        <li>Hitung suku target yang ditanyakan (Un / ?).</li>
-                        <li>Ketik angka jawaban lalu klik tombol <strong class="text-emerald-400">Cek</strong>.</li>
+                        <li>Isi identitas nama dan kelas terlebih dahulu.</li>
+                        <li>Klik Mulai Tantangan untuk mengunci nama dan mulai waktu.</li>
+                        <li>Perhatikan pola barisan, lalu hitung suku target (Un / ?).</li>
+                        <li>Setiap baris memiliki 1 kali kesempatan jawab.</li>
                     </ol>
                 </div>
             </div>
@@ -349,7 +349,7 @@
             correctCount: 0,
             secondsElapsed: 0,
             timerInterval: null,
-            gameStarted: false, // Status penanda game sudah berjalan atau belum
+            gameStarted: false,
             boardData: []
         };
 
@@ -379,18 +379,22 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('student-form').addEventListener('submit', startGameSession);
-            generateNewBoard();
+            generateNewBoard(); // Langsung buat papan saat halaman dibuka agar tidak kosong
         });
 
-        function startGameSession(e) {
-            e.preventDefault();
-            
-            // Jika game sudah berjalan, jangan biarkan form disubmit/mereset timer
+        function startGameSession() {
+            const nameInput = document.getElementById('student-name').value.trim();
+            const classInput = document.getElementById('student-class').value.trim();
+
+            if (!nameInput || !classInput) {
+                alert("Harap isi Nama Siswa/Kelompok dan Kelas/Jurusan terlebih dahulu!");
+                return;
+            }
+
             if (gameState.gameStarted) return;
 
-            gameState.studentName = document.getElementById('student-name').value || 'Siswa SMK';
-            gameState.studentClass = document.getElementById('student-class').value || 'X-SMK';
+            gameState.studentName = nameInput;
+            gameState.studentClass = classInput;
             gameState.mode = document.getElementById('mode-select').value;
 
             gameState.score = 0;
@@ -398,9 +402,9 @@
             gameState.attempts = 0;
             gameState.correctCount = 0;
             gameState.secondsElapsed = 0;
-            gameState.gameStarted = true; // Tandai game sedang aktif
+            gameState.gameStarted = true;
 
-            // Kunci input identitas dan tombol mulai agar tidak bisa diubah/direstart di tengah jalan
+            // Kunci input identitas
             document.getElementById('student-name').disabled = true;
             document.getElementById('student-class').disabled = true;
             document.getElementById('mode-select').disabled = true;
@@ -408,6 +412,8 @@
             startBtn.disabled = true;
             startBtn.className = "w-full bg-slate-700 text-slate-400 font-semibold py-2 px-4 rounded-xl text-sm cursor-not-allowed flex items-center justify-center gap-2";
             startBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Tantangan Aktif`;
+
+            document.getElementById('game-status-text').innerText = "Permainan sedang berlangsung. Selesaikan semua baris hingga tuntas!";
 
             updateStatsDisplay();
             startTimer();
@@ -432,7 +438,7 @@
             const tbody = document.getElementById('board-body');
             tbody.innerHTML = '';
             
-            const selectedMode = gameState.mode || 'campuran';
+            const selectedMode = document.getElementById('mode-select').value || 'aritmatika';
 
             ROW_CONFIGS.forEach((config, idx) => {
                 let type = selectedMode;
@@ -532,6 +538,12 @@
         }
 
         function checkAnswer(rowId) {
+            // Validasi apakah game sudah dimulai (sudah klik Mulai Tantangan)
+            if (!gameState.gameStarted) {
+                alert("Silakan isi Nama dan Kelas, lalu klik tombol 'Mulai Tantangan' di atas terlebih dahulu!");
+                return;
+            }
+
             const rowData = gameState.boardData.find(r => r.config.id === rowId);
             if (rowData.locked) return;
 
@@ -686,10 +698,12 @@
         }
 
         function restartGame() {
-            // Buka kembali kunci form agar bisa memasukkan nama/kelas baru jika ingin bermain ulang
+            document.getElementById('student-name').value = '';
+            document.getElementById('student-class').value = '';
             document.getElementById('student-name').disabled = false;
             document.getElementById('student-class').disabled = false;
             document.getElementById('mode-select').disabled = false;
+            
             const startBtn = document.getElementById('start-btn');
             startBtn.disabled = false;
             startBtn.className = "w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-2 px-4 rounded-xl text-sm transition shadow-md shadow-blue-600/20 flex items-center justify-center gap-2";
@@ -697,6 +711,7 @@
 
             gameState.gameStarted = false;
             document.getElementById('summary-modal').classList.add('hidden');
+            generateNewBoard();
         }
     </script>
 </body>
