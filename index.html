@@ -383,6 +383,31 @@
             boardData: []
         };
 
+        // Fungsi untuk mengirim skor otomatis ke Google Spreadsheet
+function kirimSkorKeSpreadsheet(namaKelompok, totalSkor, jumlahBenar, waktuSelesai) {
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxxWL5fs78kskqcDXCloyk_sU1DSdbRZvt7n5M_B9VQv67o21clNC9pXzOvRwqbsvyO/exec"; 
+
+    const data = {
+        kelompok: namaKelompok,
+        skor: totalSkor,
+        benar: jumlahBenar,
+        waktu: waktuSelesai
+    };
+
+    fetch(WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    }).then(() => {
+        console.log("Skor berhasil dikirim ke spreadsheet.");
+    }).catch((error) => {
+        console.error("Gagal mengirim skor:", error);
+    });
+}
+
         // Initialize Game App
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('student-form').addEventListener('submit', startGameSession);
@@ -667,17 +692,29 @@
         }
 
         // Finish Game & Show Certificate
-        function finishGame() {
-            clearInterval(gameState.timerInterval);
+function finishGame() {
+    clearInterval(gameState.timerInterval);
 
-            document.getElementById('summary-name').innerText = gameState.studentName;
-            document.getElementById('summary-class').innerText = gameState.studentClass;
-            document.getElementById('summary-mode').innerText = gameState.mode;
-            document.getElementById('summary-score').innerText = `${gameState.score} Poin`;
-            document.getElementById('summary-time').innerText = document.getElementById('stat-timer').innerText;
+    document.getElementById('summary-name').innerText = gameState.studentName;
+    document.getElementById('summary-class').innerText = gameState.studentClass;
+    document.getElementById('summary-mode').innerText = gameState.mode;
+    document.getElementById('summary-score').innerText = `${gameState.score} Poin`;
+    
+    let waktuTempuh = document.getElementById('stat-timer').innerText;
+    document.getElementById('summary-time').innerText = waktuTempuh;
 
-            document.getElementById('summary-modal').classList.remove('hidden');
-        }
+    // --- PANGGIL DISINI AGAR OTOMATIS TERKIRIM SAAT SELESAI ---
+    let formatNamaLengkap = `${gameState.studentName} (${gameState.studentClass})`;
+    kirimSkorKeSpreadsheet(
+        formatNamaLengkap, 
+        gameState.score, 
+        gameState.correctCount, 
+        waktuTempuh
+    );
+    // ---------------------------------------------------------
+
+    document.getElementById('summary-modal').classList.remove('hidden');
+}
 
         function restartGame() {
             document.getElementById('summary-modal').classList.add('hidden');
