@@ -199,7 +199,7 @@
                 <div class="mt-4 p-3 bg-slate-900/50 rounded-xl border border-slate-700/40 text-xs text-slate-400 flex items-center justify-between">
                     <span class="flex items-center gap-2">
                         <i class="fa-solid fa-lightbulb text-amber-400"></i>
-                        <span>Setiap baris hanya memiliki <strong>1 kesempatan jawab</strong>. Teliti sebelum menekan <strong class="text-slate-200">Cek</strong>!</span>
+                        <span>Permainan sedang berlangsung. Selesaikan semua baris hingga tuntas!</span>
                     </span>
                     <span class="text-slate-500 font-mono hidden sm:inline">Papan acak berbasis Lembar Kerja PATRICK</span>
                 </div>
@@ -349,6 +349,7 @@
             correctCount: 0,
             secondsElapsed: 0,
             timerInterval: null,
+            gameStarted: false, // Status penanda game sudah berjalan atau belum
             boardData: []
         };
 
@@ -384,6 +385,10 @@
 
         function startGameSession(e) {
             e.preventDefault();
+            
+            // Jika game sudah berjalan, jangan biarkan form disubmit/mereset timer
+            if (gameState.gameStarted) return;
+
             gameState.studentName = document.getElementById('student-name').value || 'Siswa SMK';
             gameState.studentClass = document.getElementById('student-class').value || 'X-SMK';
             gameState.mode = document.getElementById('mode-select').value;
@@ -393,6 +398,16 @@
             gameState.attempts = 0;
             gameState.correctCount = 0;
             gameState.secondsElapsed = 0;
+            gameState.gameStarted = true; // Tandai game sedang aktif
+
+            // Kunci input identitas dan tombol mulai agar tidak bisa diubah/direstart di tengah jalan
+            document.getElementById('student-name').disabled = true;
+            document.getElementById('student-class').disabled = true;
+            document.getElementById('mode-select').disabled = true;
+            const startBtn = document.getElementById('start-btn');
+            startBtn.disabled = true;
+            startBtn.className = "w-full bg-slate-700 text-slate-400 font-semibold py-2 px-4 rounded-xl text-sm cursor-not-allowed flex items-center justify-center gap-2";
+            startBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Tantangan Aktif`;
 
             updateStatsDisplay();
             startTimer();
@@ -475,7 +490,8 @@
                 targetN: targetN,
                 targetValue: targetValue,
                 missingIndex: missingIndex,
-                solved: false
+                solved: false,
+                locked: false
             };
         }
 
@@ -515,9 +531,10 @@
             tbody.appendChild(tr);
         }
 
-        // LOGIKA BARU: SEKALI JAWAB, LANGSUNG DIKUNCI (BENAR ATAU SALAH)
         function checkAnswer(rowId) {
             const rowData = gameState.boardData.find(r => r.config.id === rowId);
+            if (rowData.locked) return;
+
             const inputEl = document.getElementById(`input-${rowId}`);
             const userAns = parseFloat(inputEl.value);
 
@@ -526,13 +543,13 @@
                 return;
             }
 
-            gameState.attempts++;
-            const isCorrect = Math.abs(userAns - rowData.targetValue) < 0.01;
-
-            // KUNCI INPUT & TOMBOL SETELAH 1 KALI JAWAB (BAIK BENAR MAUPUN SALAH)
+            rowData.locked = true;
             inputEl.disabled = true;
             const btn = document.getElementById(`btn-${rowId}`);
             btn.disabled = true;
+
+            gameState.attempts++;
+            const isCorrect = Math.abs(userAns - rowData.targetValue) < 0.01;
 
             if (isCorrect) {
                 rowData.solved = true;
@@ -565,8 +582,7 @@
 
                 showModal(true, "Jawaban Benar! 🎉", `Hebat! Kamu berhasil menemukan pola pada ${rowData.config.name}.`, expText);
             } else {
-                // JIKA SALAH: JANGAN DITAMBAH SKOR, KUNCI, TAPI TETAP BERIKAN PEMBAHASAN YANG BENAR
-                gameState.completedCount++; // Hitung sebagai baris yang sudah dikerjakan agar game tetap bisa selesai
+                gameState.completedCount++;
 
                 inputEl.classList.remove('border-blue-500/50');
                 inputEl.classList.add('border-rose-500', 'bg-rose-950/40', 'text-rose-300');
@@ -624,3 +640,64 @@
             modal.classList.remove('hidden');
             setTimeout(() => {
                 card.classList.remove('scale-95', 'opacity-0');
+                card.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('feedback-modal');
+            const card = document.getElementById('modal-card');
+
+            card.classList.remove('scale-100', 'opacity-100');
+            card.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 200);
+        }
+
+        function updateStatsDisplay() {
+            document.getElementById('stat-score').innerText = gameState.score;
+            document.getElementById('stat-completed').innerText = `${gameState.completedCount} / ${gameState.totalRows}`;
+
+            let accuracy = gameState.attempts > 0 ? Math.round((gameState.correctCount / gameState.attempts) * 100) : 100;
+            document.getElementById('stat-accuracy').innerText = `${accuracy}%`;
+        }
+
+        function finishGame() {
+            clearInterval(gameState.timerInterval);
+
+            document.getElementById('summary-name').innerText = gameState.studentName;
+            document.getElementById('summary-class').innerText = gameState.studentClass;
+            document.getElementById('summary-mode').innerText = gameState.mode;
+            document.getElementById('summary-score').innerText = `${gameState.score} Poin`;
+            
+            let waktuTempuh = document.getElementById('stat-timer').innerText;
+            document.getElementById('summary-time').innerText = waktuTempuh;
+
+            kirimSkorKeSpreadsheet(
+                gameState.studentName, 
+                gameState.studentClass, 
+                gameState.score, 
+                gameState.correctCount, 
+                waktuTempuh
+            );
+
+            document.getElementById('summary-modal').classList.remove('hidden');
+        }
+
+        function restartGame() {
+            // Buka kembali kunci form agar bisa memasukkan nama/kelas baru jika ingin bermain ulang
+            document.getElementById('student-name').disabled = false;
+            document.getElementById('student-class').disabled = false;
+            document.getElementById('mode-select').disabled = false;
+            const startBtn = document.getElementById('start-btn');
+            startBtn.disabled = false;
+            startBtn.className = "w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-2 px-4 rounded-xl text-sm transition shadow-md shadow-blue-600/20 flex items-center justify-center gap-2";
+            startBtn.innerHTML = `<i class="fa-solid fa-play"></i> Mulai Tantangan`;
+
+            gameState.gameStarted = false;
+            document.getElementById('summary-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
