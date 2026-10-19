@@ -47,7 +47,6 @@
     <!-- HEADER / NAVBAR -->
     <header class="bg-slate-800/90 backdrop-blur-md border-b border-slate-700/60 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-4">
-            <!-- Brand Identity -->
             <div class="flex items-center gap-3">
                 <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-blue-500/30">
                     <i class="fa-solid fa-shapes"></i>
@@ -60,7 +59,6 @@
                 </div>
             </div>
 
-            <!-- School Info & Identity -->
             <div class="flex items-center gap-4 text-xs sm:text-sm text-slate-300 bg-slate-900/60 px-4 py-2 rounded-xl border border-slate-700/50">
                 <div class="flex items-center gap-2 border-r border-slate-700 pr-3">
                     <i class="fa-solid fa-school text-blue-400"></i>
@@ -201,7 +199,7 @@
                 <div class="mt-4 p-3 bg-slate-900/50 rounded-xl border border-slate-700/40 text-xs text-slate-400 flex items-center justify-between">
                     <span class="flex items-center gap-2">
                         <i class="fa-solid fa-lightbulb text-amber-400"></i>
-                        <span>Isi kolom target dengan angka yang tepat lalu tekan <strong class="text-slate-200">Cek</strong>.</span>
+                        <span>Setiap baris hanya memiliki <strong>1 kesempatan jawab</strong>. Teliti sebelum menekan <strong class="text-slate-200">Cek</strong>!</span>
                     </span>
                     <span class="text-slate-500 font-mono hidden sm:inline">Papan acak berbasis Lembar Kerja PATRICK</span>
                 </div>
@@ -517,6 +515,7 @@
             tbody.appendChild(tr);
         }
 
+        // LOGIKA BARU: SEKALI JAWAB, LANGSUNG DIKUNCI (BENAR ATAU SALAH)
         function checkAnswer(rowId) {
             const rowData = gameState.boardData.find(r => r.config.id === rowId);
             const inputEl = document.getElementById(`input-${rowId}`);
@@ -530,22 +529,22 @@
             gameState.attempts++;
             const isCorrect = Math.abs(userAns - rowData.targetValue) < 0.01;
 
-            if (isCorrect) {
-                if (!rowData.solved) {
-                    rowData.solved = true;
-                    gameState.score += 100;
-                    gameState.completedCount++;
-                    gameState.correctCount++;
-                }
+            // KUNCI INPUT & TOMBOL SETELAH 1 KALI JAWAB (BAIK BENAR MAUPUN SALAH)
+            inputEl.disabled = true;
+            const btn = document.getElementById(`btn-${rowId}`);
+            btn.disabled = true;
 
-                inputEl.disabled = true;
+            if (isCorrect) {
+                rowData.solved = true;
+                gameState.score += 100;
+                gameState.completedCount++;
+                gameState.correctCount++;
+
                 inputEl.classList.remove('border-blue-500/50');
                 inputEl.classList.add('border-emerald-500', 'bg-emerald-950/40', 'text-emerald-300');
                 
-                const btn = document.getElementById(`btn-${rowId}`);
-                btn.disabled = true;
                 btn.className = "px-3 py-1 bg-slate-700 text-slate-400 text-xs font-semibold rounded-lg cursor-not-allowed mx-auto";
-                btn.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> Benar`;
+                btn.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> Selesai`;
 
                 let expText = "";
                 if (rowData.type === 'aritmatika') {
@@ -566,22 +565,35 @@
 
                 showModal(true, "Jawaban Benar! 🎉", `Hebat! Kamu berhasil menemukan pola pada ${rowData.config.name}.`, expText);
             } else {
-                let hintText = "";
+                // JIKA SALAH: JANGAN DITAMBAH SKOR, KUNCI, TAPI TETAP BERIKAN PEMBAHASAN YANG BENAR
+                gameState.completedCount++; // Hitung sebagai baris yang sudah dikerjakan agar game tetap bisa selesai
+
+                inputEl.classList.remove('border-blue-500/50');
+                inputEl.classList.add('border-rose-500', 'bg-rose-950/40', 'text-rose-300');
+                
+                btn.className = "px-3 py-1 bg-slate-700 text-slate-400 text-xs font-semibold rounded-lg cursor-not-allowed mx-auto";
+                btn.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-400"></i> Ditutup`;
+
+                let solutionText = "";
                 if (rowData.type === 'aritmatika') {
-                    hintText = `
-                        <div>• Perhatikan selisih antar suku: U2 - U1 = ${rowData.terms[1] - rowData.terms[0]}</div>
-                        <div>• Beda (b) tetap untuk semua suku.</div>
-                        <div>• Coba gunakan rumus: U${rowData.targetN} = ${rowData.terms[0]} + (${rowData.targetN - 1}) * b</div>
+                    solutionText = `
+                        <div>• Jawaban kamu: <strong>${userAns}</strong> (Kurang tepat)</div>
+                        <div>• Jawaban yang benar: <strong class="text-emerald-400">${rowData.targetValue}</strong></div>
+                        <div class="mt-2 pt-2 border-t border-slate-700">• <strong>Cara Penyelesaian:</strong></div>
+                        <div>- Suku Pertama (a) = ${rowData.a}, Beda (b) = ${rowData.diffOrRatio}</div>
+                        <div>- U${rowData.targetN} = ${rowData.a} + (${rowData.targetN} - 1) * (${rowData.diffOrRatio}) = <strong>${rowData.targetValue}</strong></div>
                     `;
                 } else {
-                    hintText = `
-                        <div>• Perhatikan perbandingan antar suku: U2 / U1 = ${rowData.terms[1] / rowData.terms[0]}</div>
-                        <div>• Rasio (r) tetap untuk semua suku.</div>
-                        <div>• Coba gunakan rumus: U${rowData.targetN} = ${rowData.terms[0]} * r^(${rowData.targetN - 1})</div>
+                    solutionText = `
+                        <div>• Jawaban kamu: <strong>${userAns}</strong> (Kurang tepat)</div>
+                        <div>• Jawaban yang benar: <strong class="text-emerald-400">${rowData.targetValue}</strong></div>
+                        <div class="mt-2 pt-2 border-t border-slate-700">• <strong>Cara Penyelesaian:</strong></div>
+                        <div>- Suku Pertama (a) = ${rowData.a}, Rasio (r) = ${rowData.diffOrRatio}</div>
+                        <div>- U${rowData.targetN} = ${rowData.a} * (${rowData.diffOrRatio})^(${rowData.targetN - 1}) = <strong>${rowData.targetValue}</strong></div>
                     `;
                 }
 
-                showModal(false, "Belum Tepat!", `Jawaban kamu (${userAns}) belum sesuai dengan pola barisan.`, hintText);
+                showModal(false, "Belum Tepat!", `Kesempatan habis untuk baris ${rowData.config.name}. Perhatikan pembahasan di bawah ini ya!`, solutionText);
             }
 
             updateStatsDisplay();
@@ -612,55 +624,3 @@
             modal.classList.remove('hidden');
             setTimeout(() => {
                 card.classList.remove('scale-95', 'opacity-0');
-                card.classList.add('scale-100', 'opacity-100');
-            }, 10);
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('feedback-modal');
-            const card = document.getElementById('modal-card');
-
-            card.classList.remove('scale-100', 'opacity-100');
-            card.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 200);
-        }
-
-        function updateStatsDisplay() {
-            document.getElementById('stat-score').innerText = gameState.score;
-            document.getElementById('stat-completed').innerText = `${gameState.completedCount} / ${gameState.totalRows}`;
-
-            let accuracy = gameState.attempts > 0 ? Math.round((gameState.correctCount / gameState.attempts) * 100) : 100;
-            document.getElementById('stat-accuracy').innerText = `${accuracy}%`;
-        }
-
-        function finishGame() {
-            clearInterval(gameState.timerInterval);
-
-            document.getElementById('summary-name').innerText = gameState.studentName;
-            document.getElementById('summary-class').innerText = gameState.studentClass;
-            document.getElementById('summary-mode').innerText = gameState.mode;
-            document.getElementById('summary-score').innerText = `${gameState.score} Poin`;
-            
-            let waktuTempuh = document.getElementById('stat-timer').innerText;
-            document.getElementById('summary-time').innerText = waktuTempuh;
-
-            kirimSkorKeSpreadsheet(
-                gameState.studentName, 
-                gameState.studentClass, 
-                gameState.score, 
-                gameState.correctCount, 
-                waktuTempuh
-            );
-
-            document.getElementById('summary-modal').classList.remove('hidden');
-        }
-
-        function restartGame() {
-            document.getElementById('summary-modal').classList.add('hidden');
-            startGameSession(new Event('submit'));
-        }
-    </script>
-</body>
-</html>
