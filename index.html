@@ -78,43 +78,43 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-grow">
 
         <!-- STUDENT REGISTRATION / SESSION BAR -->
-<section id="user-info-section" class="mb-6 bg-slate-800/60 rounded-2xl p-4 border border-slate-700/60 backdrop-blur-sm">
-    <form id="student-form" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-        <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1">NAMA SISWA / KELOMPOK</label>
-            <div class="relative">
-                <i class="fa-solid fa-user absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                <input type="text" id="student-name" placeholder="Contoh: Icha / Kelompok 1" required
-                    class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 pl-9 pr-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
-            </div>
-        </div>
-        <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1">KELAS / JURUSAN</label>
-            <div class="relative">
-                <i class="fa-solid fa-graduation-cap absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                <input type="text" id="student-class" placeholder="Contoh: X TKR 1 / XI DKV" required
-                    class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 pl-9 pr-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
-            </div>
-        </div>
-        <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1">MODE MATERI</label>
-            <div class="relative">
-                <i class="fa-solid fa-calculator absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                <select id="mode-select" class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 pl-9 pr-3 text-sm text-slate-100 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
-                    <option value="aritmatika">Barisan Aritmatika (Un)</option>
-                    <option value="geometri">Barisan Geometri (Un)</option>
-                    <option value="campuran">Campuran (Aritmatika & Geometri)</option>
-                </select>
-            </div>
-        </div>
-        <div>
-            <button type="submit" id="start-btn"
-                class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-2 px-4 rounded-xl text-sm transition shadow-md shadow-blue-600/20 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-play"></i> Mulai Tantangan
-            </button>
-        </div>
-    </form>
-</section>
+        <section id="user-info-section" class="mb-6 bg-slate-800/60 rounded-2xl p-4 border border-slate-700/60 backdrop-blur-sm">
+            <form id="student-form" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">NAMA SISWA / KELOMPOK</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-user absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input type="text" id="student-name" placeholder="Contoh: Icha / Kelompok 1" required
+                            class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 pl-9 pr-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">KELAS / JURUSAN</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-graduation-cap absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input type="text" id="student-class" placeholder="Contoh: X TKR 1 / XI DKV" required
+                            class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 pl-9 pr-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">MODE MATERI</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-calculator absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <select id="mode-select" class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 pl-9 pr-3 text-sm text-slate-100 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
+                            <option value="aritmatika">Barisan Aritmatika (Un)</option>
+                            <option value="geometri">Barisan Geometri (Un)</option>
+                            <option value="campuran">Campuran (Aritmatika & Geometri)</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" id="start-btn"
+                        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-2 px-4 rounded-xl text-sm transition shadow-md shadow-blue-600/20 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-play"></i> Mulai Tantangan
+                    </button>
+                </div>
+            </form>
+        </section>
 
         <!-- DASHBOARD STATUS & STATS -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
@@ -156,13 +156,12 @@
             </div>
         </div>
 
-        <!-- MAIN GAME AREA GRID (GRID + SIDEBAR FORMULAS) -->
+        <!-- MAIN GAME AREA GRID -->
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
 
-            <!-- BOARD GRID AREA (3 COLS ON LARGE DESKTOP) -->
+            <!-- BOARD GRID AREA -->
             <div class="lg:col-span-3 bg-slate-800/80 rounded-2xl p-5 border border-slate-700/60 card-glow flex flex-col justify-between">
                 <div>
-                    <!-- Board Title & Quick Tools -->
                     <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
                         <div>
                             <h2 class="text-lg font-bold text-white flex items-center gap-2">
@@ -177,7 +176,6 @@
                         </div>
                     </div>
 
-                    <!-- Papan Table Container -->
                     <div class="overflow-x-auto rounded-xl border border-slate-700/80">
                         <table class="w-full text-left border-collapse min-w-[650px]">
                             <thead>
@@ -200,7 +198,6 @@
                     </div>
                 </div>
 
-                <!-- Guidance Note -->
                 <div class="mt-4 p-3 bg-slate-900/50 rounded-xl border border-slate-700/40 text-xs text-slate-400 flex items-center justify-between">
                     <span class="flex items-center gap-2">
                         <i class="fa-solid fa-lightbulb text-amber-400"></i>
@@ -210,18 +207,13 @@
                 </div>
             </div>
 
-            <!-- FORMULA & CHEAT SHEET SIDEBAR (1 COL) -->
+            <!-- FORMULA & SIDEBAR -->
             <div class="space-y-4">
-
-                <!-- MODAL / CARDS FORMULA -->
                 <div class="bg-slate-800/80 rounded-2xl p-5 border border-slate-700/60">
                     <h3 class="text-sm font-bold text-white mb-3 flex items-center gap-2">
                         <i class="fa-solid fa-book-bookmark text-amber-400"></i> Panduan & Rumus Cepat
                     </h3>
-
-                    <!-- Tab Formula Selector -->
                     <div class="space-y-3">
-                        <!-- Barisan Aritmatika -->
                         <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-700/70">
                             <div class="flex justify-between items-center mb-1">
                                 <span class="text-xs font-bold text-blue-400">Barisan Aritmatika</span>
@@ -230,8 +222,6 @@
                             <p class="text-xs text-slate-300 font-mono mb-1">$$U_n = a + (n-1)b$$</p>
                             <p class="text-[11px] text-slate-400">Beda ($b$) = $U_2 - U_1 = U_3 - U_2$</p>
                         </div>
-
-                        <!-- Barisan Geometri -->
                         <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-700/70">
                             <div class="flex justify-between items-center mb-1">
                                 <span class="text-xs font-bold text-emerald-400">Barisan Geometri</span>
@@ -240,8 +230,6 @@
                             <p class="text-xs text-slate-300 font-mono mb-1">$$U_n = a \cdot r^{(n-1)}$$</p>
                             <p class="text-[11px] text-slate-400">Rasio ($r$) = $U_2 / U_1 = U_3 / U_2$</p>
                         </div>
-
-                        <!-- Deret Info -->
                         <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-700/70">
                             <div class="flex justify-between items-center mb-1">
                                 <span class="text-xs font-bold text-purple-400">Jumlah Suku ($S_n$)</span>
@@ -254,7 +242,6 @@
                     </div>
                 </div>
 
-                <!-- INSTRUCTION BOX -->
                 <div class="bg-gradient-to-br from-indigo-900/40 to-slate-800/80 rounded-2xl p-4 border border-indigo-500/30">
                     <h4 class="text-xs font-bold text-indigo-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
                         <i class="fa-solid fa-list-check"></i> Petunjuk Permainan
@@ -266,38 +253,28 @@
                         <li>Ketik angka jawaban lalu klik tombol <strong class="text-emerald-400">Cek</strong>.</li>
                     </ol>
                 </div>
-
             </div>
         </div>
 
-        <!-- FEEDBACK / DISCUSSION MODAL POPUP -->
+        <!-- MODAL FEEDBACK -->
         <div id="feedback-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
             <div class="bg-slate-800 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl relative transform transition-all scale-95 opacity-0" id="modal-card">
-                <!-- Close Button -->
                 <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
-
-                <!-- Icon Status -->
                 <div id="modal-icon-container" class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">
                     <i id="modal-icon" class="fa-solid"></i>
                 </div>
-
                 <h3 id="modal-title" class="text-xl font-bold text-center text-white mb-2"></h3>
                 <p id="modal-subtitle" class="text-xs text-center text-slate-400 mb-4"></p>
-
-                <!-- Explanation Box -->
-                <div id="modal-explanation" class="bg-slate-900/90 rounded-xl p-4 text-xs font-mono text-slate-300 space-y-2 mb-6 border border-slate-700">
-                    <!-- Dynamic Discussion Content -->
-                </div>
-
+                <div id="modal-explanation" class="bg-slate-900/90 rounded-xl p-4 text-xs font-mono text-slate-300 space-y-2 mb-6 border border-slate-700"></div>
                 <button onclick="closeModal()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl text-sm transition">
                     Lanjutkan Permainan
                 </button>
             </div>
         </div>
 
-        <!-- COMPLETION CERTIFICATE / SUMMARY MODAL -->
+        <!-- MODAL SUMMARY -->
         <div id="summary-modal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
             <div class="bg-slate-800 border border-slate-700 rounded-3xl max-w-lg w-full p-6 sm:p-8 text-center relative shadow-2xl">
                 <div class="w-20 h-20 rounded-full bg-emerald-500/20 border-2 border-emerald-500 text-emerald-400 flex items-center justify-center text-4xl mx-auto mb-4 animate-bounce-short">
@@ -305,8 +282,6 @@
                 </div>
                 <h2 class="text-2xl font-black text-white mb-1">Selamat! Papan Selesai!</h2>
                 <p class="text-xs text-slate-400 mb-6">Laporan Hasil Pembelajaran Papan Acak Interaktif (PATRICK)</p>
-
-                <!-- Student Score Summary Board -->
                 <div class="bg-slate-900 rounded-2xl p-4 text-left space-y-3 mb-6 border border-slate-700">
                     <div class="flex justify-between items-center border-b border-slate-800 pb-2">
                         <span class="text-xs text-slate-400">Nama Siswa / Kelompok:</span>
@@ -329,7 +304,6 @@
                         <span id="summary-time" class="text-xs font-bold text-emerald-400"></span>
                     </div>
                 </div>
-
                 <div class="flex gap-3">
                     <button onclick="restartGame()" class="flex-1 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl text-sm transition hover:opacity-90">
                         <i class="fa-solid fa-rotate-right mr-1"></i> Main Lagi
@@ -340,7 +314,6 @@
                 </div>
             </div>
         </div>
-
     </main>
 
     <!-- FOOTER -->
@@ -355,9 +328,8 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC GAME -->
+    <!-- SCRIPT LOGIC -->
     <script>
-        // Preset Colors Palette for Rows (A to G) matching report innovation
         const ROW_CONFIGS = [
             { id: 'A', name: 'Baris A', color: 'bg-red-500/10 border-red-500/30 text-red-400', badge: 'bg-red-500 text-white' },
             { id: 'B', name: 'Baris B', color: 'bg-blue-500/10 border-blue-500/30 text-blue-400', badge: 'bg-blue-500 text-white' },
@@ -368,7 +340,6 @@
             { id: 'G', name: 'Baris G', color: 'bg-indigo-500/10 border-indigo-500/30 text-indigo-400', badge: 'bg-indigo-500 text-white' }
         ];
 
-        // Game State Variables
         let gameState = {
             studentName: 'Siswa SMK',
             studentClass: 'X-SMK',
@@ -383,46 +354,43 @@
             boardData: []
         };
 
-        // Fungsi untuk mengirim skor otomatis ke Google Spreadsheet secara terpisah
-function kirimSkorKeSpreadsheet(namaSiswa, kelasSiswa, totalSkor, jumlahBenar, waktuSelesai) {
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxxWL5fs78kskqcDXCloyk_sU1DSdbRZvt7n5M_B9VQv67o21clNC9pXzOvRwqbsvyO/exec"; 
+        // Fungsi kirim skor terpisah ke Spreadsheet
+        function kirimSkorKeSpreadsheet(namaSiswa, kelasSiswa, totalSkor, jumlahBenar, waktuSelesai) {
+            const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxxWL5fs78kskqcDXCloyk_sU1DSdbRZvt7n5M_B9VQv67o21clNC9pXzOvRwqbsvyO/exec"; 
 
-    const data = {
-        kelompok: namaSiswa,  // Kolom Nama / Kelompok di Spreadsheet
-        kelas: kelasSiswa,    // Kolom Kelas / Jurusan di Spreadsheet (pastikan Apps Script Anda mendukung parameter 'kelas')
-        skor: totalSkor,
-        benar: jumlahBenar,
-        waktu: waktuSelesai
-    };
+            const data = {
+                kelompok: namaSiswa,
+                kelas: kelasSiswa,
+                skor: totalSkor,
+                benar: jumlahBenar,
+                waktu: waktuSelesai
+            };
 
-    fetch(WEB_APP_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    }).then(() => {
-        console.log("Skor dan data siswa berhasil dikirim ke spreadsheet.");
-    }).catch((error) => {
-        console.error("Gagal mengirim skor:", error);
-    });
-}
+            fetch(WEB_APP_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }).then(() => {
+                console.log("Skor dan data siswa berhasil dikirim ke spreadsheet.");
+            }).catch((error) => {
+                console.error("Gagal mengirim skor:", error);
+            });
+        }
 
-        // Initialize Game App
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('student-form').addEventListener('submit', startGameSession);
             generateNewBoard();
         });
 
-        // Start Game Session with Timer
         function startGameSession(e) {
             e.preventDefault();
             gameState.studentName = document.getElementById('student-name').value || 'Siswa SMK';
             gameState.studentClass = document.getElementById('student-class').value || 'X-SMK';
             gameState.mode = document.getElementById('mode-select').value;
 
-            // Reset Stats
             gameState.score = 0;
             gameState.completedCount = 0;
             gameState.attempts = 0;
@@ -433,12 +401,10 @@ function kirimSkorKeSpreadsheet(namaSiswa, kelasSiswa, totalSkor, jumlahBenar, w
             startTimer();
             generateNewBoard();
 
-            // Notification / Scroll to board
             document.getElementById('user-info-section').classList.add('border-blue-500/50');
             window.scrollTo({ top: 300, behavior: 'smooth' });
         }
 
-        // Timer Functionality
         function startTimer() {
             clearInterval(gameState.timerInterval);
             gameState.timerInterval = setInterval(() => {
@@ -449,7 +415,6 @@ function kirimSkorKeSpreadsheet(namaSiswa, kelasSiswa, totalSkor, jumlahBenar, w
             }, 1000);
         }
 
-        // Generate Board Questions dynamically
         function generateNewBoard() {
             gameState.boardData = [];
             const tbody = document.getElementById('board-body');
@@ -458,7 +423,6 @@ function kirimSkorKeSpreadsheet(namaSiswa, kelasSiswa, totalSkor, jumlahBenar, w
             const selectedMode = gameState.mode || 'campuran';
 
             ROW_CONFIGS.forEach((config, idx) => {
-                // Determine sequence type: Aritmatika or Geometri
                 let type = selectedMode;
                 if (selectedMode === 'campuran') {
                     type = (idx % 2 === 0) ? 'aritmatika' : 'geometri';
@@ -473,45 +437,36 @@ function kirimSkorKeSpreadsheet(namaSiswa, kelasSiswa, totalSkor, jumlahBenar, w
             updateStatsDisplay();
         }
 
-        // Helper to generate sequences math logic
         function createSequenceRow(config, type, index) {
             let a, diffOrRatio, terms = [], targetN, targetValue, missingIndex;
 
             if (type === 'aritmatika') {
-                // Random start 'a' (-15 to 30) and beda 'b' (-5 to 8, non zero)
                 a = Math.floor(Math.random() * 30) - 10;
                 diffOrRatio = Math.floor(Math.random() * 10) - 4;
-                if (diffOrRatio === 0) diffOrRatio = 3; // avoid 0 diff
+                if (diffOrRatio === 0) diffOrRatio = 3;
 
-                // Generate 6 base terms
                 for (let i = 1; i <= 6; i++) {
                     terms.push(a + (i - 1) * diffOrRatio);
                 }
 
-                // Random target position between U4 and U10
                 const targetPositions = [4, 5, 6, 7, 8, 9, 10];
                 targetN = targetPositions[Math.floor(Math.random() * targetPositions.length)];
                 targetValue = a + (targetN - 1) * diffOrRatio;
-
-                // Position of missing value ? in column 1-6 or target
-                missingIndex = Math.floor(Math.random() * 6); // 0 to 5 column
-
+                missingIndex = Math.floor(Math.random() * 6);
             } else {
-                // Geometri: Start 'a' (1 to 12) and rasio 'r' (2, 3, 0.5, or -2)
                 const ratios = [2, 3, -2, 0.5];
                 diffOrRatio = ratios[Math.floor(Math.random() * ratios.length)];
                 a = (diffOrRatio === 0.5) ? Math.pow(2, Math.floor(Math.random() * 4) + 3) : Math.floor(Math.random() * 5) + 1;
 
                 for (let i = 1; i <= 6; i++) {
                     let val = a * Math.pow(diffOrRatio, i - 1);
-                    // Format float cleanly if ratio is 0.5
                     terms.push(Number.isInteger(val) ? val : parseFloat(val.toFixed(2)));
                 }
 
-                targetN = Math.floor(Math.random() * 4) + 5; // U5 to U8
+                targetN = Math.floor(Math.random() * 4) + 5;
                 let tVal = a * Math.pow(diffOrRatio, targetN - 1);
                 targetValue = Number.isInteger(tVal) ? tVal : parseFloat(tVal.toFixed(2));
-                missingIndex = Math.floor(Math.random() * 4) + 2; // Col 3 to 6
+                missingIndex = Math.floor(Math.random() * 4) + 2;
             }
 
             return {
@@ -527,7 +482,6 @@ function kirimSkorKeSpreadsheet(namaSiswa, kelasSiswa, totalSkor, jumlahBenar, w
             };
         }
 
-        // Render Row to HTML
         function renderRowHTML(rowData) {
             const tbody = document.getElementById('board-body');
             const tr = document.createElement('tr');
@@ -536,12 +490,7 @@ function kirimSkorKeSpreadsheet(namaSiswa, kelasSiswa, totalSkor, jumlahBenar, w
 
             let colsHTML = '';
             for (let i = 0; i < 6; i++) {
-                if (i === rowData.missingIndex) {
-                    // Hide one of the columns as challenge or show column 1-6 full and target as ?
-                    colsHTML += `<td class="p-3 text-center font-bold text-slate-300">${rowData.terms[i]}</td>`;
-                } else {
-                    colsHTML += `<td class="p-3 text-center text-slate-300">${rowData.terms[i]}</td>`;
-                }
+                colsHTML += `<td class="p-3 text-center text-slate-300">${rowData.terms[i]}</td>`;
             }
 
             tr.innerHTML = `
@@ -569,7 +518,6 @@ function kirimSkorKeSpreadsheet(namaSiswa, kelasSiswa, totalSkor, jumlahBenar, w
             tbody.appendChild(tr);
         }
 
-        // Check Answer Logic with Feedback
         function checkAnswer(rowId) {
             const rowData = gameState.boardData.find(r => r.config.id === rowId);
             const inputEl = document.getElementById(`input-${rowId}`);
@@ -600,7 +548,6 @@ function kirimSkorKeSpreadsheet(namaSiswa, kelasSiswa, totalSkor, jumlahBenar, w
                 btn.className = "px-3 py-1 bg-slate-700 text-slate-400 text-xs font-semibold rounded-lg cursor-not-allowed mx-auto";
                 btn.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> Benar`;
 
-                // Prepare explanation text
                 let expText = "";
                 if (rowData.type === 'aritmatika') {
                     expText = `
@@ -640,13 +587,11 @@ function kirimSkorKeSpreadsheet(namaSiswa, kelasSiswa, totalSkor, jumlahBenar, w
 
             updateStatsDisplay();
 
-            // Check if game complete
             if (gameState.completedCount === gameState.totalRows) {
                 setTimeout(finishGame, 1000);
             }
         }
 
-        // Modal Display Feedback
         function showModal(isSuccess, title, subtitle, explanationHTML) {
             const modal = document.getElementById('feedback-modal');
             const card = document.getElementById('modal-card');
@@ -683,7 +628,6 @@ function kirimSkorKeSpreadsheet(namaSiswa, kelasSiswa, totalSkor, jumlahBenar, w
             }, 200);
         }
 
-        // Stats Display Updates
         function updateStatsDisplay() {
             document.getElementById('stat-score').innerText = gameState.score;
             document.getElementById('stat-completed').innerText = `${gameState.completedCount} / ${gameState.totalRows}`;
@@ -692,33 +636,27 @@ function kirimSkorKeSpreadsheet(namaSiswa, kelasSiswa, totalSkor, jumlahBenar, w
             document.getElementById('stat-accuracy').innerText = `${accuracy}%`;
         }
 
-        // Finish Game & Show Certificate
-function finishGame() {
-    clearInterval(gameState.timerInterval);
+        function finishGame() {
+            clearInterval(gameState.timerInterval);
 
-    document.getElementById('summary-name').innerText = gameState.studentName;
-    document.getElementById('summary-class').innerText = gameState.studentClass;
-    document.getElementById('summary-mode').innerText = gameState.mode;
-    document.getElementById('summary-score').innerText = `${gameState.score} Poin`;
-    
-    let waktuTempuh = document.getElementById('stat-timer').innerText;
-    document.getElementById('summary-time').innerText = waktuTempuh;
+            document.getElementById('summary-name').innerText = gameState.studentName;
+            document.getElementById('summary-class').innerText = gameState.studentClass;
+            document.getElementById('summary-mode').innerText = gameState.mode;
+            document.getElementById('summary-score').innerText = `${gameState.score} Poin`;
+            
+            let waktuTempuh = document.getElementById('stat-timer').innerText;
+            document.getElementById('summary-time').innerText = waktuTempuh;
 
-    // --- KIRIM DATA TERPISAH KE SPREADSHEET ---
-    kirimSkorKeSpreadsheet(
-        gameState.studentName, 
-        gameState.studentClass, 
-        gameState.score, 
-        gameState.correctCount, 
-        waktuTempuh
-    );
-    // ------------------------------------------
+            kirimSkorKeSpreadsheet(
+                gameState.studentName, 
+                gameState.studentClass, 
+                gameState.score, 
+                gameState.correctCount, 
+                waktuTempuh
+            );
 
-    document.getElementById('summary-modal').classList.remove('hidden');
-}
-
-    document.getElementById('summary-modal').classList.remove('hidden');
-}
+            document.getElementById('summary-modal').classList.remove('hidden');
+        }
 
         function restartGame() {
             document.getElementById('summary-modal').classList.add('hidden');
