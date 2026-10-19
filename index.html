@@ -78,43 +78,43 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-grow">
 
         <!-- STUDENT REGISTRATION / SESSION BAR -->
-        <section id="user-info-section" class="mb-6 bg-slate-800/60 rounded-2xl p-4 border border-slate-700/60 backdrop-blur-sm">
-            <form id="student-form" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-400 mb-1">NAMA SISWA / KELOMPOK</label>
-                    <div class="relative">
-                        <i class="fa-solid fa-user absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                        <input type="text" id="student-name" placeholder="Contoh: Kelompok Patrick / Budi" required
-                            class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 pl-9 pr-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-400 mb-1">KELAS / JURUSAN</label>
-                    <div class="relative">
-                        <i class="fa-solid fa-graduation-cap absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                        <input type="text" id="student-class" placeholder="Contoh: X TKR 1 / XI RPL 2" required
-                            class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 pl-9 pr-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-400 mb-1">MODE MATERI</label>
-                    <div class="relative">
-                        <i class="fa-solid fa-calculator absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                        <select id="mode-select" class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 pl-9 pr-3 text-sm text-slate-100 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
-                            <option value="aritmatika">Barisan Aritmatika (Un)</option>
-                            <option value="geometri">Barisan Geometri (Un)</option>
-                            <option value="campuran">Campuran (Aritmatika & Geometri)</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <button type="submit" id="start-btn"
-                        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-2 px-4 rounded-xl text-sm transition shadow-md shadow-blue-600/20 flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-play"></i> Mulai Tantangan
-                    </button>
-                </div>
-            </form>
-        </section>
+<section id="user-info-section" class="mb-6 bg-slate-800/60 rounded-2xl p-4 border border-slate-700/60 backdrop-blur-sm">
+    <form id="student-form" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+        <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">NAMA SISWA / KELOMPOK</label>
+            <div class="relative">
+                <i class="fa-solid fa-user absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                <input type="text" id="student-name" placeholder="Contoh: Icha / Kelompok 1" required
+                    class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 pl-9 pr-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
+            </div>
+        </div>
+        <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">KELAS / JURUSAN</label>
+            <div class="relative">
+                <i class="fa-solid fa-graduation-cap absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                <input type="text" id="student-class" placeholder="Contoh: X TKR 1 / XI DKV" required
+                    class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 pl-9 pr-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
+            </div>
+        </div>
+        <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">MODE MATERI</label>
+            <div class="relative">
+                <i class="fa-solid fa-calculator absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                <select id="mode-select" class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 pl-9 pr-3 text-sm text-slate-100 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
+                    <option value="aritmatika">Barisan Aritmatika (Un)</option>
+                    <option value="geometri">Barisan Geometri (Un)</option>
+                    <option value="campuran">Campuran (Aritmatika & Geometri)</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <button type="submit" id="start-btn"
+                class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-2 px-4 rounded-xl text-sm transition shadow-md shadow-blue-600/20 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-play"></i> Mulai Tantangan
+            </button>
+        </div>
+    </form>
+</section>
 
         <!-- DASHBOARD STATUS & STATS -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
@@ -383,12 +383,13 @@
             boardData: []
         };
 
-        // Fungsi untuk mengirim skor otomatis ke Google Spreadsheet
-function kirimSkorKeSpreadsheet(namaKelompok, totalSkor, jumlahBenar, waktuSelesai) {
+        // Fungsi untuk mengirim skor otomatis ke Google Spreadsheet secara terpisah
+function kirimSkorKeSpreadsheet(namaSiswa, kelasSiswa, totalSkor, jumlahBenar, waktuSelesai) {
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxxWL5fs78kskqcDXCloyk_sU1DSdbRZvt7n5M_B9VQv67o21clNC9pXzOvRwqbsvyO/exec"; 
 
     const data = {
-        kelompok: namaKelompok,
+        kelompok: namaSiswa,  // Kolom Nama / Kelompok di Spreadsheet
+        kelas: kelasSiswa,    // Kolom Kelas / Jurusan di Spreadsheet (pastikan Apps Script Anda mendukung parameter 'kelas')
         skor: totalSkor,
         benar: jumlahBenar,
         waktu: waktuSelesai
@@ -402,7 +403,7 @@ function kirimSkorKeSpreadsheet(namaKelompok, totalSkor, jumlahBenar, waktuSeles
         },
         body: JSON.stringify(data)
     }).then(() => {
-        console.log("Skor berhasil dikirim ke spreadsheet.");
+        console.log("Skor dan data siswa berhasil dikirim ke spreadsheet.");
     }).catch((error) => {
         console.error("Gagal mengirim skor:", error);
     });
@@ -703,15 +704,18 @@ function finishGame() {
     let waktuTempuh = document.getElementById('stat-timer').innerText;
     document.getElementById('summary-time').innerText = waktuTempuh;
 
-    // --- PANGGIL DISINI AGAR OTOMATIS TERKIRIM SAAT SELESAI ---
-    let formatNamaLengkap = `${gameState.studentName} (${gameState.studentClass})`;
+    // --- KIRIM DATA TERPISAH KE SPREADSHEET ---
     kirimSkorKeSpreadsheet(
-        formatNamaLengkap, 
+        gameState.studentName, 
+        gameState.studentClass, 
         gameState.score, 
         gameState.correctCount, 
         waktuTempuh
     );
-    // ---------------------------------------------------------
+    // ------------------------------------------
+
+    document.getElementById('summary-modal').classList.remove('hidden');
+}
 
     document.getElementById('summary-modal').classList.remove('hidden');
 }
